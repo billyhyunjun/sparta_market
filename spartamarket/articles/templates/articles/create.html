@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div>
+    <br />
+    <h2>상품정보</h2> <hr />
+  </div>
+
+  <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <br />
+    <p>
+      <img id="preview" style="width: 300px;" src="{% static 'articles/image-gallery.png' %}"/>
+      <br>
+      <label for="id_image">상품이미지:</label>
+      <input type="file" name="image" accept="image/*" id="id_image" onchange="readURL(this);" />
+    </p>
+    <br />
+    <p>
+      <label for="id_title">상품명:</label>
+      <input type="text" name="title" maxlength="50" required id="id_title" />
+    </p>
+    <br />
+    <p>
+      <label for="id_content">상품설명:</label>
+      <textarea name="content" cols="40" rows="10" required id="id_content"></textarea>
+    </p>
+    <br />
+    <p>
+      <label for="id_price">가격:</label>
+      <input type="number" name="price" required id="id_price" />
+    </p>
+    <button type="submit"> 판매하기 </button>
+  </form>
+  <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader()
+        reader.onload = function (e) {
+          document.getElementById('preview').src = e.target.result
+        }
+        reader.readAsDataURL(input.files[0])
+      } else {
+        document.getElementById('preview').src = ''
+      }
+    }
+  </script>
+{% endblock %}

@@ -21,7 +21,6 @@ def login(request):
         elif request.POST.get("way") == "signup":
             form_singup = CustumUserCreationForm(request.POST)
             form_login = AuthenticationForm()
-            form_singup.point = 0
             if form_singup.is_valid():
                 user = form_singup.save()
                 auth_login(request, user)

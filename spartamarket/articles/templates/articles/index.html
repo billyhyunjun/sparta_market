@@ -1,5 +1,100 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+  <style>
+    .main_img {
+      display: flex;
+      justify-content: center;
+      background-color: bisque;
+    }
+    header {
+      background-color: transparent;
+      padding: 50px 0;
+      overflow: auto;
+      box-sizing: border-box;
+    }
+    
+    h1 {
+      height: 100px;
+    }
+    
+    h1 span {
+      position: relative;
+      top: 20px;
+      display: inline-block;
+      animation: bounce 0.6s ease infinite alternate;
+      font-family: 'Titan One', cursive;
+      font-size: 80px;
+      color: gray;
+      text-shadow: 0 1px 0 gray, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc, 0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent, 0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
+    }
+    
+    h1 span:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    
+    h1 span:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    
+    h1 span:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    
+    h1 span:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+    
+    h1 span:nth-child(6) {
+      animation-delay: 0.5s;
+    }
+    
+    h1 span:nth-child(7) {
+      animation-delay: 0.6s;
+    }
+    
+    h1 span:nth-child(8) {
+      animation-delay: 0.7s;
+    }
+    
+    h1 span:nth-child(9) {
+      animation-delay: 0.8s;
+    }
+    
+    @keyframes bounce {
+      100% {
+        top: -20px;
+        text-shadow: 0 1px 0 #ffffff, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc, 0 5px 0 #ccc, 0 6px 0 #ccc, 0 7px 0 #ccc, 0 8px 0 #ccc, 0 9px 0 #ccc, 0 50px 25px rgba(0, 0, 0, 0.2);
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+  <div class="main_img">
+    <img src="{% static 'articles/Rammus.png' %}" style="width: 300px; height: 300px;" alt="이미지 없슈" /><br />
+    <header style="margin: 0 100px;">
+      <h1>
+        <span>S</span>
+        <span>p</span>
+        <span>a</span>
+        <span>r</span>
+        <span>t</span>
+        <span>a</span>
+      </h1>
+      <h1>
+        <span>M</span>
+        <span>a</span>
+        <span>r</span>
+        <span>k</span>
+        <span>e</span>
+        <span>t</span>
+      </h1>
+    </header>
+    <img src="{% static 'articles/teemo.png' %}" style="width: 300px; height: 300px;" alt="이미지 없슈" /><br />
+  </div>
+{% endblock %}
 
 {% block content %}
-안녕하세요
-{% endblock content %}
+
+{% endblock %}
