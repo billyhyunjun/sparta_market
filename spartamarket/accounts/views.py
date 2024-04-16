@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, update_session_auth_hash
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from .forms import CustomUserChangeForm, CustumUserCreationForm
 from django.contrib import messages
+from .models import User
+from articles.models import Article
 
 
 # Create your views here.
@@ -25,7 +27,6 @@ def login(request):
                 user = form_singup.save()
                 auth_login(request, user)
                 return redirect("index")
-        print(form_singup.errors)
         messages.add_message(request, messages.INFO, '입력이 잘못 되었습니다.')
     else:
         form_login = AuthenticationForm()
@@ -43,6 +44,7 @@ def logout(request):
         auth_logout(request)
     return redirect("index")
 
+
 @require_POST
 def delete(request):
     if request.user.is_authenticated:
@@ -50,17 +52,34 @@ def delete(request):
         auth_logout(request)
     return redirect("index")
 
+
 @require_http_methods(["GET", "POST"])
 def update(request):
-    if request.method == "POST":
-        form = CustumUserCreationForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect("index")
-    else:
-        form = CustomUserChangeForm()
-    context = {
-        "form": form,
-    }
-    return render(request, "accounts/update.html", context)
-    
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = CustomUserChangeForm(
+                request.POST, request.FILES, instance=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect("index")
+            else:
+                messages.add_message(request, messages.INFO, '입력이 잘못 되었습니다.')
+        user = get_object_or_404(User, pk=request.user.pk)
+        context = {
+            "user": user,
+        }
+        return render(request, "accounts/update.html", context)
+    return redirect("accounts:login")
+
+
+@require_http_methods(["GET", "POST"])
+def profile(request):
+    if request.user.is_authenticated:
+        user = get_object_or_404(User, pk=request.user.pk)
+        articles = Article.objects.filter(author=user).order_by("-created_at")
+        context = {
+            "user": user,
+            "articles": articles,
+        }
+        return render(request, "accounts/profile.html", context)
+    return redirect("accounts:login")

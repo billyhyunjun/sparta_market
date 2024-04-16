@@ -6,7 +6,11 @@ from .models import Article, Comment
 
 
 def index(request):
-    return render(request, 'articles/index.html')
+    articles = Article.objects.all().order_by("-created_at")[:3]
+    context = {
+        "articles": articles,
+    }
+    return render(request, 'articles/index.html', context)
 
 # Create your views here.
 
@@ -22,7 +26,7 @@ def articles(request):
 def view(request, pk):
     article = get_object_or_404(Article, pk=pk)
     comment_form = CommentForm()
-    comments = Comment.objects.all().order_by("-created_at")
+    comments = article.comments.all().order_by("-pk")
     context = {
         "article": article,
         "comment_form": comment_form,

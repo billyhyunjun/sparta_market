@@ -1,5 +1,91 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<style>
+    .custom_box{
+        display: flex;
+        justify-content: center;
 
+    }
+    .labels{
+        width: 200px;
+        text-align: right;
+    }
+    .inputs{
+        width: 200px;
+    }
+</style>
+
+{% endblock style %}
 {% block content %}
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <script>
+      alert('{{message}}');
+    </script>
+    {% endfor %}
+</div>
+{% endif %}
+<br>
+  <h1>회원수정</h1> <hr><br>
+  <form action="{% url 'accounts:update' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="custom_box">
+      <div>
+        <p>
+          <img id="preview" style="width: 300px;" src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'accounts/user.png' %}{% endif %}" />
+          <br />
+          <label for="id_image">프로필이미지:</label>
+          <input type="file" name="image" accept="image/*" id="id_image" onchange="readURL(this);" />
+        </p>
+      </div>
+      <div>
+        <p>
+          <label class="labels" for="id_username">아이디:</label>
+          <input class="inputs" type="text" name="username" maxlength="150" autofocus required id="id_username" value="{{ user.username }}" readonly/>
+        </p>
 
-{% endblock content %}
+        <p>
+          <label class="labels" for="id_password1">비밀번호:</label>
+          <input class="inputs" type="password" name="password1" autocomplete="new-password" required id="id_password1" />
+        </p>
+
+        <p>
+          <label class="labels" for="id_password2">비밀번호 확인:</label>
+          <input class="inputs" type="password" name="password2" autocomplete="new-password" required id="id_password2" />
+        </p>
+
+        
+        <p>
+            <label class="labels" for="id_last_name">성:</label>
+            <input class="inputs" type="last_name" name="last_name" autocomplete="last_name" required id="id_last_name" value="{{ user.last_name }}"  />
+        </p>
+        
+        <p>
+            <label class="labels" for="id_first_name">이름:</label>
+            <input class="inputs" type="first_name" name="first_name" autocomplete="first_name" required id="id_first_name" value="{{ user.first_name }}" />
+        </p>
+
+        <p>
+          <label class="labels" for="id_email">이메일:</label>
+          <input class="inputs" type="email" name="email" autocomplete="email" required id="id_email" value="{{ user.email }}" />
+        </p>
+      </div>
+    </div>
+    <input type="submit" value="프로필변경" />
+  </form>
+  <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader()
+        reader.onload = function (e) {
+          document.getElementById('preview').src = e.target.result
+        }
+        reader.readAsDataURL(input.files[0])
+      } else {
+        document.getElementById('preview').src = ''
+      }
+    }
+  </script>
+{% endblock %}

@@ -2,32 +2,19 @@
 {% load static %}
 
 {% block style %}
-  <style>
-    .imgs {
-      width: 300px;
-      height: 300px;
-      margin-top: 20px;
-    }
-    .card-title{
-      width: 300px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  </style>
 {% endblock %}
 
 {% block content %}
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for article in articles %}
-      <a href="{% url 'articles:view' article.pk %}  ">
+      <a href="{% url 'articles:view' article.pk  %}  ">
         <div class="col" style="width: 326px;">
           <div class="card" style="align-items: center;">
             <img class="imgs" src="{{ article.image.url }}" class="card-img-top" />
-              <div class="card-body">
-                <h5 class="card-title">{{ article.title }}</h5>
-                <p class="card-text">{{ article.price }} 포인트</p>
-              </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ article.title }}</h5>
+              <p class="card-text">{{ article.price }} 포인트</p>
+            </div>
           </div>
         </div>
       </a>

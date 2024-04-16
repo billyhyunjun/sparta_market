@@ -6,7 +6,7 @@
   <a href="{% url 'articles:articles' %}"><button>목록 보기</button></a><br /><br />
   [ {{ article.id }} ] 번 째 게시물 <br />
   {% if article.image %}
-    <img src="{{ article.image.url }}" alt="{{ article.image }}" /><br />
+    <img class="imgs" src="{{ article.image.url }}" alt="{{ article.image }}" /><br />
   {% endif %}
   <p>제목 : {{ article.title }}</p>
   <p>작성자 : {{ article.author }}</p>
@@ -37,19 +37,22 @@
     </form>
   {% endif %}
   <br>
-  <h3>댓글</h3>
+  {% if comments %}
+  <h3>댓글</h3><hr>
   {% for comment in comments %}
-    <ul>
-      <p>작성자 : {{ comment.author }}</p>
-      <p>내용 : {{ comment.content }}</p>
-      <p>작성일 : {{ comment.created_at }}</p>
-      {% if comment.author == request.user %}
-        <form action="{% url 'articles:comment_delete' comment.pk %}" method="POST">
-          {% csrf_token %}
-          <input type="submit" value="삭제" />
-        </form>
-      {% endif %}
-    </ul>
-    <hr />
+  <ul>
+    <p>작성자 : {{ comment.author }}</p>
+    <p>내용 : {{ comment.content }}</p>
+    <p>작성일 : {{ comment.created_at }}</p>
+    {% if comment.author == request.user %}
+    <form action="{% url 'articles:comment_delete' comment.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="삭제" />
+    </form>
+    {% endif %}
+  </ul>
+  <hr />
   {% endfor %}
+  {% endif %}
+    <br>
 {% endblock %}
