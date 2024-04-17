@@ -6,7 +6,7 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = "__all__"
-        exclude = ("author", "like_users", "price",)
+        exclude = ("author", "like_users",)
         
 
 class CommentForm(forms.ModelForm):

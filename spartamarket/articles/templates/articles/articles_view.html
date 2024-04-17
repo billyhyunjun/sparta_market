@@ -54,9 +54,9 @@
   <p>내용 : {{ article.content }}</p>
   <p>생성일자 : {{ article.created_at }}</p>
   {% for hashtag in hashtags %}
-  <a href="{% url "articles:hashtag" hashtag.pk %}" style="margin: 10px;"><label> {{ hashtag.content }} </label></a>
+  <a href="{% url "articles:hashtag" hashtag.pk %}" style="margin: 10px;"> {{ hashtag.content }} </a>
   {% endfor %}
-  <br>
+  <br><br>
   
   <div style="display: flex; margin-top: 5px;">
     {% if article.author == request.user or request.user.is_superuser or is_staff%}

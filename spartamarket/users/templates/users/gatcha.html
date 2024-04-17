@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="{% url "users:gatcha" %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">뽑기</button>
+</form>
+
+{% endblock content %}

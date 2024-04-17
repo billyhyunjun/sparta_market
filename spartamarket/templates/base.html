@@ -52,6 +52,15 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url "articles:create" %}">게시물 작성</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "stores:stores" %}">장터 보기</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "stores:create" %}">판매글 작성</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "users:gatcha" %}">카드 뽑기</a>
+              </li>
             </ul>
           </div>
           {% if request.user.is_authenticated %}

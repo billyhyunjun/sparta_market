@@ -115,6 +115,7 @@ def delete(request, pk):
 def update(request, pk):
     if request.user.is_authenticated:
         article = get_object_or_404(Article, pk=pk)
+        hashtags = article.hashtags.all().order_by("content")
         if request.user == article.author:
             if request.method == "POST":
                 form = ArticleForm(
@@ -129,6 +130,7 @@ def update(request, pk):
                 return redirect("articles:articles_view", article.pk)
             context = {
                 "article": article,
+                "hashtags": hashtags,
             }
             return render(request, "articles/update.html", context)
         else:

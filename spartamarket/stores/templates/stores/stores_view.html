@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+  <style>
+    .title_box {
+      margin: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sort_box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn_set {
+      background-color: transparent;
+      border-radius: 5px;
+      height: 50px;
+      margin-right: 50px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="title_box">
+    <h1>{{ store.title }}</h1> <hr /><br />
+    <form action="{% url 'users:profile' store.author.username  %}" method="GET">
+      <button class="btn_set" type="submit">작성자 프로필 보기</button>
+    </form>
+    <a href="{% url 'stores:create' %}"><button class="btn_set">새로운 글 작성</button></a>
+    <a href="{% url 'stores:stores' %}"><button class="btn_set">목록 보기</button></a><br />
+  </div>
+  <br />
+  [ {{ store.id }} ] 번 째 게시물 <br />
+  {% if store.image %}
+    <img class="imgs" src="{{ store.image.url }}" alt="{{ store.image }}" /><br />
+  {% endif %}
+  <br />
+  <p>작성자 : {{ store.author }}</p>
+  <p>내용 : {{ store.content }}</p>
+  <p>생성일자 : {{ store.created_at }}</p>
+  <p>판매가격 : {{ store.price }}</p>
+  <br /><br />
+  <div style="display: flex; margin-top: 5px;">
+    {% if store.author == request.user or request.user.is_superuser or is_staff %}
+      <form action="{% url 'stores:delete' store.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" style="margin-right: 5px;">삭제하기</button>
+      </form>
+      <form action="{% url 'stores:update' store.pk %}" method="GET">
+        <button type="submit">수정하기</button>
+      </form>
+    {% endif %}
+  </div>
+  <div style="display: flex; margin-top: 5px;">
+    {% if store.author != request.user %}
+      {% comment %} <form action="{% url 'stores:delete' store.pk %}" method="POST"> {% endcomment %}
+        {% comment %} {% csrf_token %} {% endcomment %}
+        <button type="submit" style="margin-right: 5px;">구매하기</button>
+    {% endif %}
+  </div>
+{% endblock %}

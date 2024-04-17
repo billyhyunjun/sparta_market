@@ -42,10 +42,9 @@
         <input type="text" name="title" maxlength="50" required id="id_title" value="{{ article.title }}" />
     </div>
     <div class="table">
-        <label class="lable_size" for="id_price">가격:</label>
-        <input type="number" name="price" required id="id_price" value="{{ article.price }}" style="margin-right: 20px;"/>
-        포인트
-    </div>
+      <label class="lable_size" for="hashtag">해시태그:</label>
+      <input type="text" name="hashtag" required id="hashtag" value="{% for hashtag in hashtags %} {{ hashtag }} {% endfor %}" style="margin-right: 20px;"/>앞에 "#" 을 붙여서 작성해주세요
+  </div>
     <div class="table">
         <label class="lable_size" for="id_content">상품설명:</label>
         <textarea name="content" cols="40" rows="10" required id="id_content">{{ article.content }}</textarea>

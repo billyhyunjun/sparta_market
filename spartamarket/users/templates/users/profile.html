@@ -81,6 +81,7 @@
   <br />
   <div class="title_box">
   <h2>작성 게시글</h2> 
+  <a href="{% url "users:cards" user.pk %}"> <button>보유 카드 보기</button> </a>
   <a href="{% url "articles:like_articles" user.pk %}"> <button>찜 목록 보기</button> </a>
   </div>
   <hr /><br />

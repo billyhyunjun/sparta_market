@@ -15,7 +15,6 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to="images/", blank=True)
-    price = models.IntegerField()
     
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="articles")
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_articles")
@@ -23,7 +22,7 @@ class Article(models.Model):
     
     def __str__(self) -> str:
         return self.title
-
+    
 
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")

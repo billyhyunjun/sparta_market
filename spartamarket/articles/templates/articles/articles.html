@@ -21,7 +21,7 @@
 
 {% block content %}
   <div class="title_box">
-    <h1>판매 게시판</h1>
+    <h1>게시판 모음</h1>
     <form action="{% url 'articles:articles' %}" method="GET">
       <div class="sort_box">
         <input type="hidden" name="select" value="{{ request.GET.select }}">
@@ -31,8 +31,6 @@
           <option value="content">내용 순</option>
           <option value="created_at">생성일 순</option>
           <option value="-created_at">최신 순</option>
-          <option value="-price">높은 가격순</option>
-          <option value="price">낮은 가격순</option>
         </select>
         <button type="submit">정렬</button>
       </div>
