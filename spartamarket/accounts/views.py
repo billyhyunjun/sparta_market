@@ -50,7 +50,10 @@ def delete(request):
     if request.user.is_authenticated:
         request.user.delete()
         auth_logout(request)
-    return redirect("index")
+        return redirect("index")
+    else:
+        return redirect("index")
+
 
 
 @require_http_methods(["GET", "POST"])
@@ -69,17 +72,4 @@ def update(request):
             "user": user,
         }
         return render(request, "accounts/update.html", context)
-    return redirect("accounts:login")
-
-
-@require_http_methods(["GET", "POST"])
-def profile(request):
-    if request.user.is_authenticated:
-        user = get_object_or_404(User, pk=request.user.pk)
-        articles = Article.objects.filter(author=user).order_by("-created_at")
-        context = {
-            "user": user,
-            "articles": articles,
-        }
-        return render(request, "accounts/profile.html", context)
     return redirect("accounts:login")

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+  <style>
+    .title_box {
+      margin: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sort_box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn_set{
+      background-color: transparent;
+      border-radius: 5px;
+      height: 50px;
+      margin-right: 50px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="title_box">
+  <h1> {{ article.title }} </h1> <hr /><br />
+  <form action="{% url "users:profile" article.author.username %}" method="GET">
+    <button class="btn_set" type="submit">작성자 프로필 보기</button>
+  </form>
+  <form action="{% url 'articles:like' article.pk %}" method="POST">
+    {% csrf_token %}
+    {% if request.user in article.like_users.all %}
+    {% comment %} 좋아요 상태 {% endcomment %}
+    <button class="btn_set" >좋아요 <img src="{% static "articles/heart.png" %}" style="width: 30px; height: 30px;"></button> 
+    {% else %}
+    {% comment %} 안좋아요 상태 {% endcomment %}
+    <button class="btn_set" >안좋아요 <img src="{% static "articles/love.png" %}" style="width: 30px; height: 30px;"></button>
+    {% endif %}
+  </form>
+    <a href="{% url 'articles:create' %}"><button class="btn_set">새로운 글 작성</button></a>
+    <a href="{% url 'articles:articles' %}"><button class="btn_set">목록 보기</button></a><br />
+</div>
+  <br />
+  [ {{ article.id }} ] 번 째 게시물 <br />
+  {% if article.image %}
+    <img class="imgs" src="{{ article.image.url }}" alt="{{ article.image }}" /><br />
+  {% endif %}
+  <br>
+  <p>작성자 : {{ article.author }}</p>
+  <p>내용 : {{ article.content }}</p>
+  <p>생성일자 : {{ article.created_at }}</p>
+  {% for hashtag in hashtags %}
+  <a href="{% url "articles:hashtag" hashtag.pk %}" style="margin: 10px;"><label> {{ hashtag.content }} </label></a>
+  {% endfor %}
+  <br>
+  
+  <div style="display: flex; margin-top: 5px;">
+    {% if article.author == request.user or request.user.is_superuser or is_staff%}
+      <form action="{% url 'articles:delete' article.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" style="margin-right: 5px;">삭제하기</button>
+      </form>
+      <form action="{% url 'articles:update' article.pk %}" method="GET">
+        <button type="submit">수정하기</button>
+      </form>
+    {% endif %}
+  </div>
+
+  <br />
+  <hr />
+  {% if request.user.is_authenticated %}
+    <h3>댓글 적기</h3>
+    <form action="{% url 'articles:comment_create' article.pk %}" method="POST">
+      {% csrf_token %}
+      {{ comment_form.as_p }}
+      <input type="submit" value="작성" />
+    </form>
+  {% endif %}
+  <br>
+  {% if comments %}
+  <h3>댓글</h3><hr>
+  {% for comment in comments %}
+  <ul>
+    <p>작성자 : {{ comment.author }}</p>
+    <p>내용 : {{ comment.content }}</p>
+    <p>작성일 : {{ comment.created_at }}</p>
+    {% if comment.author == request.user or request.user.is_superuser or is_staff %}
+    <form action="{% url 'articles:comment_delete' comment.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="삭제" />
+    </form>
+    {% endif %}
+  </ul>
+  <hr />
+  {% endfor %}
+  {% endif %}
+    <br>
+{% endblock %}
