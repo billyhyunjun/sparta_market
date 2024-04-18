@@ -77,7 +77,6 @@ def create(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             form = StoreForm(request.POST)
-            print(form)
             if form.is_valid():
                 store = form.save(commit=False)
                 store.author = request.user
@@ -87,7 +86,6 @@ def create(request):
                 seller.cards.remove(card)
                 messages.add_message(request, messages.INFO, '상점이 등록되었습니다.')
                 return redirect("stores:stores_view", store.pk)
-            print(form.errors)
         else:
             form = StoreForm()
         context = {
