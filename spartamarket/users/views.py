@@ -90,7 +90,6 @@ def card_storage(request, pk):
         if request.method == "POST":
             cardnum = request.POST.get("cardnum")
             card_choices = Card.objects.filter(cardnum=cardnum, card_users=request.user)
-            print(card_choices[0].pk)
             if card_choices.exists():
                 context = {
                     "card_choice": card_choices.first(),  
