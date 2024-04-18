@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+  <style>
+    .title_box {
+      margin: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sort_box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn_set {
+      background-color: transparent;
+      border-radius: 5px;
+      height: 50px;
+      margin-right: 50px;
+    }
+
+    .container {
+      width: 220px; height: 310px; transition : all 0.1s;
+      position: relative;
+    }
+    .overlay {
+      position: absolute;
+      width: 220px;
+      height: 310px;
+      background: linear-gradient(105deg,
+      transparent 40%,
+      rgba(255, 219, 112, 0.8) 45%,
+      rgba(132, 50, 255 ,0.6) 50%,
+      transparent 54%);
+      filter: brightness(1.1) opacity(0.8);
+      mix-blend-mode: color-dodge;
+      background-size: 150% 150%;
+      background-position: 100%;
+      transition: all 0.1s;
+      z-index: 1;
+    }
+    .card {
+      width: 220px; height: 310px;
+      background-image: url(pika.webp);
+      background-size: cover;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+  <div class="title_box">
+    <h1>{{ store.title }}</h1> 
+    <form action="{% url 'users:profile' store.author.username  %}" method="GET">
+      <button class="btn_set" type="submit">작성자 프로필 보기</button>
+    </form>
+    <a href="{% url 'stores:create' %}"><button class="btn_set">새로운 글 작성</button></a>
+    <a href="{% url 'stores:stores' %}"><button class="btn_set">목록 보기</button></a><br />
+  </div>
+  <hr />
+<div style="display: flex; flex-direction: column; align-items: center;">
+  <div style="display: flex; margin-top: 5px;">
+    <h3 style="margin-right: 100px;">[ {{ store.author }} ] 님의 게시물</h3>
+    {% if store.author == request.user or request.user.is_superuser or is_staff %}
+      <form action="{% url 'stores:delete' store.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" style="margin-right: 5px;">삭제하기</button>
+      </form>
+      <form action="{% url 'stores:update' store.pk %}" method="GET">
+        <button type="submit">수정하기</button>
+      </form>
+    {% endif %}
+  </div>
+   <br />
+   <div class="container">
+    <div class="overlay"></div>
+    <img class="card" src="{% static 'stores/pokemon ('|add:store.card.cardnum|add:').png' %}"/><br />
+  </div>
+    <br />
+  <p>내용 : {{ store.content }}</p>
+  <p>생성일자 : {{ store.created_at }}</p>
+  <p>판매가격 : {{ store.price }} 포인트</p>
+
+  {% if store.author != request.user %}
+  <br>
+  <form action="{% url 'stores:buy' store.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" style="margin-right: 5px;">구매하기</button>
+  </form>
+  <br>
+  {% endif %}
+</div>
+
+<script>
+  var container = document.querySelector('.container')
+  var overlay = document.querySelector('.overlay')
+  container.addEventListener('mousemove', function(e){
+    var x = e.offsetX
+    var y = e.offsetY
+    var rotateY = -1/5 * x + 20
+    var rotateX = 4/30 * y - 20
+
+    overlay.style = `background-position : ${x/5 + y/5}%; filter : opacity(${x/200}) brightness(1.2)`
+
+    container.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+  })
+
+  container.addEventListener('mouseout', function(){
+    overlay.style = 'filter : opacity(0)'
+    container.style = 'transform : perspective(350px) rotateY(0deg) rotateX(0deg)'
+  })
+</script>
+{% endblock %}

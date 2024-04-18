@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+  <style>
+    .custom_box {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    .title_box {
+      margin: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="title_box">
+  <h1>회원프로필</h1>
+  {{ member }}님의 | 팔로워 : {{ member.followers.count }} 명 | 팔로잉 : {{ member.following.count }} 명
+  {% if request.user != user %}
+  <form action="{% url 'users:follow' user.id %}" method="POST">
+    {% csrf_token %}
+    {% if request.user in member.followers.all %}
+    {% comment %} 팔로우 상태 {% endcomment %}
+    <button class="btn_set" >팔로우 <img src="{% static "users/add-friend.png" %}" style="width: 30px; height: 30px;"></button> 
+    {% else %}
+    {% comment %} 언팔로우 상태 {% endcomment %}
+    <button class="btn_set" >언팔로우 <img src="{% static "users/delete-friend.png" %}" style="width: 30px; height: 30px;"></button>
+    {% endif %}
+  {% endif %}
+  </form>
+</div>
+<hr /><br />
+  <div class="custom_box">
+    <div>
+      <p>
+        <h2 for="id_image"><프로필 이미지></h2>
+        <img id="preview"
+          style="width: 350px; height: 350px;"
+          src="{% if user.image %}
+            {{ user.image.url }}
+          {% else %}
+            {% static 'accounts/user.png' %}
+          {% endif %}" />
+        <br />
+      </p>
+    </div>
+    <div>
+      <p>
+        <h2 class="labels" for="id_username">아이디 : {{ user.username }}</h2>
+      </p>
+      <br />
+      <p>
+        <h2 class="labels" for="id_last_name">유저이름 : {{ user.last_name }}{{ user.first_name }}</h2>
+      </p>
+      <br />
+      <p>
+        <h2 class="labels" for="id_email">이메일 : {{ user.email }}</h2>
+      </p>
+      <br />
+      <p>
+        <h2 class="labels" for="id_point">보유 포인트 : {{ user.point }}</h2>
+      </p>
+      <br />
+    </div>
+  </div>
+  {% if request.user == user or request.user.is_superuser or is_staff %}
+  <div style="display: flex; justify-content: end;">
+    <a href="{% url 'accounts:update' %}" style="margin-right: 20px;"><button>수정하기</button></a>
+    <form action="{% url 'accounts:delete' %}" method="POST" style="margin-right: 100px;">
+      {% csrf_token %}
+      <button type="button" onclick="removeCheck()">계정삭제</button>
+    </form>
+  </div>
+  {% endif %}
+  <br />
+  <div class="title_box">
+  <h2>작성 게시글</h2> 
+  <a href="{% url "users:cards" user.pk %}"> <button>보유 카드 보기</button> </a>
+  <a href="{% url "articles:like_articles" user.pk %}"> <button>찜 목록 보기</button> </a>
+  </div>
+  <hr /><br />
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for article in articles %}
+      <a href="{% url 'articles:articles_view' article.pk %}  ">
+        <div class="col" style="width: 326px;">
+          <div class="card" style="align-items: center;">
+            <img class="imgs" src="{{ article.image.url }}" class="card-img-top" />
+            <div class="card-body">
+              <h3 class="card-title">{{ article.title }}</h3>
+              <div style="display: flex; flex-direction: row; margin-top: 10px;">
+                <p class="card-text" style="margin-right: 20px;">{{ article.like_users.all|length }} 좋아요</p>
+                <p class="card-text">{{ article.comments.all|length }} 댓글 수</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+  <br />
+{% endblock %}

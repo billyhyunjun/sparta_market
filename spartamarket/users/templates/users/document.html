@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+  <style>
+    .title_box {
+      margin: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sort_box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn_set {
+      background-color: transparent;
+      border-radius: 5px;
+      height: 50px;
+      margin-right: 50px;
+    }
+
+    .container {
+      width: 220px; height: 310px; transition : all 0.1s;
+      position: relative;
+    }
+    .overlay {
+      position: absolute;
+      width: 220px;
+      height: 310px;
+      background: linear-gradient(105deg,
+      transparent 40%,
+      rgba(255, 219, 112, 0.8) 45%,
+      rgba(132, 50, 255 ,0.6) 50%,
+      transparent 54%);
+      filter: brightness(1.1) opacity(0.8);
+      mix-blend-mode: color-dodge;
+      background-size: 150% 150%;
+      background-position: 100%;
+      transition: all 0.1s;
+      z-index: 1;
+    }
+    .card {
+      width: 220px; height: 310px;
+      background-image: url(pika.webp);
+      background-size: cover;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="title_box">
+    <h1>카드 도감</h1> 
+  </div>
+  <br><hr>
+<br>
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+  {% for card in cards %}
+  <div style="display: flex; flex-direction: column; justify-content: center; margin: 10px;">
+      <div style="text-align: center;" > No. {{ card }}</div>
+      <div class="container" id="container_{{ card }}"> <!-- 각 container에 고유한 id 추가 -->
+        <div class="overlay"></div>
+        <img class="card" src="{% static 'stores/pokemon ('|add:card|add:').png' %}" >
+      </div>
+  </div>
+  {% endfor %}
+</div>
+<script>
+  // 각 container에 대해 이벤트 리스너 추가
+  {% for card in cards %}
+  var container_{{ card }} = document.querySelector('#container_{{ card }}');
+  var overlay_{{ card }} = container_{{ card }}.querySelector('.overlay');
+
+  container_{{ card }}.addEventListener('mousemove', function(e){
+    var x = e.offsetX
+    var y = e.offsetY
+    var rotateY = -1/5 * x + 20
+    var rotateX = 4/30 * y - 20
+
+    overlay_{{ card }}.style = `background-position : ${x/5 + y/5}%; filter : opacity(${x/200}) brightness(1.2)`
+
+    container_{{ card }}.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+  })
+
+  container_{{ card }}.addEventListener('mouseout', function(){
+    overlay_{{ card }}.style = 'filter : opacity(0)'
+    container_{{ card }}.style = 'transform : perspective(350px) rotateY(0deg) rotateX(0deg)'
+  })
+  {% endfor %}
+</script>
+
+{% endblock content %}

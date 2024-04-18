@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+  <style>
+    .title_box {
+      margin: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sort_box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="title_box">
+    <h1>판매 게시판</h1>
+    <form action="{% url 'stores:stores' %}" method="GET">
+      <div class="sort_box">
+        <input type="hidden" name="select" value="{{ request.GET.select }}" />
+        <input type="hidden" name="search" value="{{ request.GET.search }}" />
+        <select class="form-select" aria-label="Default select example" name="sort" style="width: 200px; margin-right: 20px;">
+          <option selected value="title">제목 순</option>
+          <option value="content">내용 순</option>
+          <option value="created_at">생성일 순</option>
+          <option value="-created_at">최신 순</option>
+          <option value="-price">높은 가격순</option>
+          <option value="price">낮은 가격순</option>
+        </select>
+        <button type="submit">정렬</button>
+      </div>
+    </form>
+  </div>
+  <hr /><br />
+
+  <div style="display: flex; justify-content: center;">
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="storeContainer">
+      {% for store in stores %}
+        <a href="{% url 'stores:stores_view' store.pk %}" style="width: 326px;">
+          <div class="col">
+            <div class="card" style="align-items: center;">
+              <img class="imgs" src="{% static 'stores/pokemon ('|add:store.card.cardnum|add:').png' %}" class="card-img-top" />
+              <div class="card-body">
+                <h3 class="card-title">{{ store.title }}</h3>
+                <div style="display: flex; flex-direction: row; margin-top: 10px;">
+                  <label class="card-title">{{ store.price }} 포인트</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+  <br />
+{% endblock %}

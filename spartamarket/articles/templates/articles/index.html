@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+  <style>
+    .main_img {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      background-color: var(--standard_color);
+    }
+    header {
+      background-color: transparent;
+      padding: 50px 0;
+      overflow: auto;
+      box-sizing: border-box;
+    }
+    
+    h1 {
+      height: 100px;
+    }
+    
+    h1 span {
+      position: relative;
+      top: 20px;
+      display: inline-block;
+      animation: bounce 0.6s ease infinite alternate;
+      font-family: 'Titan One', cursive;
+      font-size: 80px;
+      color: var(--background_color);
+      text-shadow: 0 1px 0 var(--background_color), 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc, 0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent, 0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
+    }
+    
+    h1 span:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    
+    h1 span:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    
+    h1 span:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    
+    h1 span:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+    
+    h1 span:nth-child(6) {
+      animation-delay: 0.5s;
+    }
+    
+    h1 span:nth-child(7) {
+      animation-delay: 0.6s;
+    }
+    
+    h1 span:nth-child(8) {
+      animation-delay: 0.7s;
+    }
+    
+    h1 span:nth-child(9) {
+      animation-delay: 0.8s;
+    }
+    
+    @keyframes bounce {
+      100% {
+        top: -20px;
+        text-shadow: 0 1px 0 #ffffff, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc, 0 5px 0 #ccc, 0 6px 0 #ccc, 0 7px 0 #ccc, 0 8px 0 #ccc, 0 9px 0 #ccc, 0 50px 25px rgba(0, 0, 0, 0.2);
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+  <div class="main_img">
+    <img class="imgs" src="{% static 'articles/Rammus.png' %}" alt="이미지 없슈" /><br />
+    <header style="margin: 0 100px;">
+      <h1>
+        <span>S</span>
+        <span>p</span>
+        <span>a</span>
+        <span>r</span>
+        <span>t</span>
+        <span>a</span>
+      </h1>
+      <h1>
+        <span>M</span>
+        <span>a</span>
+        <span>r</span>
+        <span>k</span>
+        <span>e</span>
+        <span>t</span>
+      </h1>
+    </header>
+    <img class="imgs" src="{% static 'articles/teemo.png' %}" alt="이미지 없슈" /><br />
+  </div>
+  {% endblock %}
+  
+  {% block content %}
+<br>
+  <h2 style="text-align: center; margin-top: 10px;">최근 작성된 게시물</h2><hr>
+<br>
+  <div style="display: flex; justify-content: center;">
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="articleContainer">
+      {% for article in articles %}
+        <a href="{% url 'articles:articles_view'  article.pk  %}" style="width: 326px;">
+          <div class="col">
+            <div class="card" style="align-items: center;">
+              <img class="imgs" src="{% if article.image %}{{ article.image.url }}{% else %} {% static 'articles/image-gallery.png' %} {% endif %}" class="card-img-top" />
+              <div class="card-body">
+                <h3 class="card-title">{{ article.title }}</h3>
+                <div style="display: flex; flex-direction: row; margin-top: 10px;">
+                  <p class="card-text" style="margin-right: 20px;">{{ article.like_users.all|length }} 좋아요</p>
+                  <p class="card-text">{{ article.comments.all|length }} 댓글 수</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+<br>
+  <h2 style="text-align: center; margin-top: 10px;">최근 작성된 상점</h2><hr>
+  <br>
+  <div style="display: flex; justify-content: center;">
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="storeContainer">
+      {% for store in stores %}
+        <a href="{% url 'stores:stores_view' store.pk %}" style="width: 326px;">
+          <div class="col">
+            <div class="card" style="align-items: center;">
+              <img class="imgs" src="{% static 'stores/pokemon ('|add:store.card.cardnum|add:').png' %}" class="card-img-top" />
+              <div class="card-body">
+                <h3 class="card-title">{{ store.title }}</h3>
+                <div style="display: flex; flex-direction: row; margin-top: 10px;">
+                  <label class="card-title">{{ store.price }} 포인트</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+  <br>
+{% endblock %}
