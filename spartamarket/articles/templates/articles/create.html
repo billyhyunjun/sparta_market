@@ -30,7 +30,7 @@
     {% csrf_token %}
     <div class="table">
       <div>
-        <label class="lable_size" for="id_image">상품이미지:</label>
+        <label class="lable_size" for="id_image">게시글이미지:</label>
       </div>
       <div class="div_box">
         <img id="preview" style="width: 300px; height: 300px;" src="{% static 'articles/image-gallery.png' %}" />
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="table">
-        <label class="lable_size" for="id_title">상품명:</label>
+        <label class="lable_size" for="id_title">제목:</label>
         <input type="text" name="title" maxlength="50" required id="id_title" />
     </div>
     <div class="table">
@@ -51,7 +51,7 @@
         <textarea name="content" cols="40" rows="10" required id="id_content"></textarea>
     </div>
     <div style="display: flex; justify-content: right; margin: 50px 0 ;">
-      <button type="submit" style="margin-right: 100px;">판매하기</button>
+      <button type="submit" style="margin-right: 100px;">등록하기</button>
     </div>
   </form>
   <script>

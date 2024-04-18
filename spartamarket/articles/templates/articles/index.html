@@ -95,13 +95,19 @@
     </header>
     <img class="imgs" src="{% static 'articles/teemo.png' %}" alt="이미지 없슈" /><br />
   </div>
+  {% endblock %}
+  
+  {% block content %}
+<br>
   <h2 style="text-align: center; margin-top: 10px;">최근 작성된 게시물</h2><hr>
-  <div class="row row-cols-1 row-cols-md-3 g-4" style="margin: 20px 200px;">
-    {% for article in articles %}
-      <a href="{% url 'articles:articles_view' article.pk %}  ">
-        <div class="col" style="width: 326px;">
-          <div class="card" style="align-items: center;">
-            <img class="imgs" src="{{ article.image.url }}" class="card-img-top" />
+<br>
+  <div style="display: flex; justify-content: center;">
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="articleContainer">
+      {% for article in articles %}
+        <a href="{% url 'articles:articles_view'  article.pk  %}" style="width: 326px;">
+          <div class="col">
+            <div class="card" style="align-items: center;">
+              <img class="imgs" src="{% if article.image %}{{ article.image.url }}{% else %} {% static 'articles/image-gallery.png' %} {% endif %}" class="card-img-top" />
               <div class="card-body">
                 <h3 class="card-title">{{ article.title }}</h3>
                 <div style="display: flex; flex-direction: row; margin-top: 10px;">
@@ -109,13 +115,33 @@
                   <p class="card-text">{{ article.comments.all|length }} 댓글 수</p>
                 </div>
               </div>
+            </div>
           </div>
-        </div>
-      </a>
-    {% endfor %}
+        </a>
+      {% endfor %}
+    </div>
   </div>
-{% endblock %}
-
-{% block content %}
-
+<br>
+  <h2 style="text-align: center; margin-top: 10px;">최근 작성된 상점</h2><hr>
+  <br>
+  <div style="display: flex; justify-content: center;">
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="storeContainer">
+      {% for store in stores %}
+        <a href="{% url 'stores:stores_view' store.pk %}" style="width: 326px;">
+          <div class="col">
+            <div class="card" style="align-items: center;">
+              <img class="imgs" src="{% static 'stores/pokemon ('|add:store.card.cardnum|add:').png' %}" class="card-img-top" />
+              <div class="card-body">
+                <h3 class="card-title">{{ store.title }}</h3>
+                <div style="display: flex; flex-direction: row; margin-top: 10px;">
+                  <label class="card-title">{{ store.price }} 포인트</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+  <br>
 {% endblock %}

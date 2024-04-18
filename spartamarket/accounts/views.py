@@ -50,9 +50,9 @@ def delete(request):
     if request.user.is_authenticated:
         request.user.delete()
         auth_logout(request)
+        messages.add_message(request, messages.INFO, '삭제 되었습니다.')
         return redirect("index")
-    else:
-        return redirect("index")
+    return redirect("index")
 
 
 
@@ -64,6 +64,7 @@ def update(request):
                 request.POST, request.FILES, instance=request.user)
             if form.is_valid():
                 form.save()
+                messages.add_message(request, messages.INFO, '수정 되었습니다.')
                 return redirect("index")
             else:
                 messages.add_message(request, messages.INFO, '입력이 잘못 되었습니다.')

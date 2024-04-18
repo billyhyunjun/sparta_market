@@ -2,14 +2,18 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST, require_http_methods
 from .forms import ArticleForm, CommentForm
 from django.contrib.auth import get_user_model
-
+from django.contrib import messages
 from .models import Article, Comment, Hashtag
+from accounts.models import User
+from stores.models import Store
 
 
 def index(request):
     articles = Article.objects.all().order_by("-created_at")[:3]
+    stores = Store.objects.all().order_by("-created_at")[:3]
     context = {
         "articles": articles,
+        "stores": stores,
     }
     return render(request, 'articles/index.html', context)
 
@@ -85,12 +89,15 @@ def create(request):
             if form.is_valid():
                 article = form.save(commit=False)
                 article.author = request.user
-                article.price = 0
                 article.save()
+                user = get_object_or_404(User, pk=request.user.pk)
+                user.point += 100
+                user.save() 
                 for word in request.POST.get("hashtag").split():  # content를 공백기준 리스트로 변경
                     if word.startswith('#'):  # '#' 로 시작하는 요소 선택
                         hashtag, created = Hashtag.objects.get_or_create(content=word)
                         article.hashtags.add(hashtag)
+                messages.add_message(request, messages.INFO, '게시글이 생성 되었습니다. **100포인트** ')
                 return redirect("articles:articles_view", article.pk)
         else:
             form = ArticleForm()
@@ -106,6 +113,7 @@ def delete(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if request.user == article.author:
         article.delete()
+        messages.add_message(request, messages.INFO, '게시글이 삭제 되었습니다.')
         return redirect("articles:articles")
 
 
@@ -125,6 +133,7 @@ def update(request, pk):
                         if word.startswith('#'):
                             hashtag, created = Hashtag.objects.get_or_create(content=word)
                             article.hashtags.add(hashtag)
+                messages.add_message(request, messages.INFO, '게시글이 수정 되었습니다.')
                 return redirect("articles:articles_view", article.pk)
             context = {
                 "article": article,
@@ -146,6 +155,10 @@ def comment_create(request, pk):
             comment.article = article
             comment.author = request.user
             comment.save()
+            user = get_object_or_404(User, pk=request.user.pk)
+            user.point += 10
+            user.save()
+            messages.add_message(request, messages.INFO, ' **10포인트** ')
             return redirect("articles:articles_view", pk=pk)
     return redirect("accounts:login")
 
@@ -161,13 +174,11 @@ def comment_delete(request, pk):
 
 
 def hashtag(request, hash_pk):
-    if request.user.is_authenticated:
-        hashtag = get_object_or_404(Hashtag, pk=hash_pk)
-        articles = hashtag.hashtag_articles.order_by('-pk')
-        
-        context = {
-            'hashtag': hashtag, 
-            'articles': articles,
-        }
-        return render(request, 'articles/hashtag.html', context)
-    return redirect("accounts:login")
+    hashtag = get_object_or_404(Hashtag, pk=hash_pk)
+    articles = hashtag.hashtag_articles.order_by('-pk')
+    
+    context = {
+        'hashtag': hashtag, 
+        'articles': articles,
+    }
+    return render(request, 'articles/hashtag.html', context)

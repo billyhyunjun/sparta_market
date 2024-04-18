@@ -2,9 +2,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST, require_http_methods
 from .forms import StoreForm
 from django.contrib.auth import get_user_model
-
+from accounts.models import User
 from .models import Store
-
+from django.contrib import messages
 
 def index(request):
     stores = Store.objects.all().order_by("-created_at")[:3]
@@ -33,9 +33,6 @@ def stores(request):
     else:
         stores = Store.objects.all().order_by(sort)
         
-    print(">>>>>>>>>>>>>>>>")
-    for store in stores:
-        print(store.card.cardnum)
     context = {
         "stores": stores,
         "select": select,
@@ -83,9 +80,12 @@ def create(request):
             print(form)
             if form.is_valid():
                 store = form.save(commit=False)
-                print(store.card)
                 store.author = request.user
                 store.save()
+                seller = get_object_or_404(User, pk=store.author.pk)
+                card = store.card
+                seller.cards.remove(card)
+                messages.add_message(request, messages.INFO, '상점이 등록되었습니다.')
                 return redirect("stores:stores_view", store.pk)
             print(form.errors)
         else:
@@ -99,10 +99,37 @@ def create(request):
 
 @require_POST
 def delete(request, pk):
-    store = get_object_or_404(Store, pk=pk)
-    if request.user == store.author:
-        store.delete()
-        return redirect("stores:stores")
+    if request.user.is_authenticated:
+        store = get_object_or_404(Store, pk=pk)
+        if request.user == store.author:
+            seller = get_object_or_404(User, pk=store.author.pk)
+            card = store.card
+            seller.cards.add(card)
+            store.delete()
+            messages.add_message(request, messages.INFO, '상점이 삭제 되었습니다.')
+            return redirect("stores:stores")
+    return redirect("accounts:login")
+
+@require_POST
+def buy(request, pk):
+    if request.user.is_authenticated:
+        store = get_object_or_404(Store, pk=pk)
+        if request.user != store.author:
+            seller = get_object_or_404(User, pk=store.author.pk)
+            buyer = get_object_or_404(User, pk=request.user.pk)
+            if buyer.point >= store.price:
+                buyer.point -= store.price
+                seller.point += store.price
+                buyer.save()
+                seller.save()
+                card = store.card
+                buyer.cards.add(card)
+                store.delete()
+                return redirect("stores:stores")
+            else:
+                messages.add_message(request, messages.INFO, '포인드가 부족합니다.')
+                return redirect("stores:stores_view", pk)
+    return redirect("accounts:login")
 
 
 @require_http_methods(["GET", "POST"])
@@ -114,6 +141,7 @@ def update(request, pk):
                 form = StoreForm(request.POST, instance=store)
                 if form.is_valid():
                     store = form.save()
+                    messages.add_message(request, messages.INFO, '상점이 수정 되었습니다.')
                 return redirect("stores:stores_view", store.pk)
             context = {
                 "store": store,

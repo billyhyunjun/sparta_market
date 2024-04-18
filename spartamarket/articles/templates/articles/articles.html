@@ -44,7 +44,7 @@
         <a href="{% url 'articles:articles_view'  article.pk  %}" style="width: 326px;">
           <div class="col">
             <div class="card" style="align-items: center;">
-              <img class="imgs" src="{{ article.image.url }}" class="card-img-top" />
+              <img class="imgs" src="{% if article.image %}{{ article.image.url }}{% else %} {% static 'articles/image-gallery.png' %} {% endif %}" class="card-img-top" />
               <div class="card-body">
                 <h3 class="card-title">{{ article.title }}</h3>
                 <div style="display: flex; flex-direction: row; margin-top: 10px;">
