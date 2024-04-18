@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+  <style>
+    .main_img {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      background-color: var(--standard_color);
+    }
+    header {
+      background-color: transparent;
+      padding: 50px 0;
+      overflow: auto;
+      box-sizing: border-box;
+    }
+    
+    h1 {
+      height: 100px;
+    }
+    
+    h1 span {
+      position: relative;
+      top: 20px;
+      display: inline-block;
+      animation: bounce 0.6s ease infinite alternate;
+      font-family: 'Titan One', cursive;
+      font-size: 80px;
+      color: var(--background_color);
+      text-shadow: 0 1px 0 var(--background_color), 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc, 0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent, 0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
+    }
+    
+    h1 span:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    
+    h1 span:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    
+    h1 span:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    
+    h1 span:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+    
+    h1 span:nth-child(6) {
+      animation-delay: 0.5s;
+    }
+    
+    h1 span:nth-child(7) {
+      animation-delay: 0.6s;
+    }
+    
+    h1 span:nth-child(8) {
+      animation-delay: 0.7s;
+    }
+    
+    h1 span:nth-child(9) {
+      animation-delay: 0.8s;
+    }
+    
+    @keyframes bounce {
+      100% {
+        top: -20px;
+        text-shadow: 0 1px 0 #ffffff, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc, 0 5px 0 #ccc, 0 6px 0 #ccc, 0 7px 0 #ccc, 0 8px 0 #ccc, 0 9px 0 #ccc, 0 50px 25px rgba(0, 0, 0, 0.2);
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+  <div class="main_img">
+    <img class="imgs" src="{% static 'articles/Rammus.png' %}" alt="이미지 없슈" /><br />
+    <header style="margin: 0 100px;">
+      <h1>
+        <span>튜</span>
+        <span>토</span>
+        <span>리</span>
+        <span>얼</span>
+      </h1>
+    </header>
+    <img class="imgs" src="{% static 'articles/teemo.png' %}" alt="이미지 없슈" /><br />
+  </div>
+  {% endblock %}
+  
+  {% block content %}
+  <br>
+<h1>내 웹사이트 소개</h1>
+    <hr>
+    <br>
+<h2>사용자 계정</h2>
+<p>회원가입, 로그인, 로그아웃 기능을 제공합니다.</p>
+<p>각 계정에는 포인트가 있으며 포인트로 물건을 구매하거나 카드 뽑기를 할 수 있습니다.</p>
+<br>
+<h2>게시글 관리</h2>
+<p>게시글 작성, 수정, 삭제, 검색 기능을 제공합니다.</p>
+<p>게시글 작성을 하면 100포인트가 지급이 되며, 각 게시물에 댓글 작성시 10포인트가 지급이 됩니다.</p>
+<br>
+<h2>상점 관리</h2>
+<p>상점 등록, 수정, 삭제, 구매 기능을 제공합니다.</p>
+<p>각 상점에 내가 보유한 카드를 판매 할 수 있으며 반대로 내 포인트로 구매가 가능합니다.</p>
+<br>
+<h2>유저 프로필 및 기타 기능</h2>
+<p>유저 프로필 보기, 팔로우, 카드 보유 현황, 가챠 등의 기능이 있습니다.</p>
+<br>
+<h2>문서</h2>
+<p>사용 가능한 카드 목록을 확인할 수 있는 문서가 있습니다.</p>
+<br>
+<h2>소스 코드</h2>
+<p>전체 소스 코드는 Django 기반으로 작성되었습니다. 각각의 기능은 함수 또는 클래스로 정의되어 있습니다.</p>
+<br>
+<h2>추가 정보</h2>
+<p>더 자세한 내용이나 질문이 있다면 아래 연락처로 문의해 주세요.</p>
+<br>
+<ul>
+    <li>이메일: phjphj9999@gmail.com</li>
+</ul>
+<br>
+  
+{% endblock %}

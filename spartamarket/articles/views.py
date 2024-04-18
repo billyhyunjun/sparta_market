@@ -182,3 +182,6 @@ def hashtag(request, hash_pk):
         'articles': articles,
     }
     return render(request, 'articles/hashtag.html', context)
+
+def about(request):
+    return render(request, 'articles/about.html')
