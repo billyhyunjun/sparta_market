@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<br>
+<div class="title_box">
+    <h1>카드 도감</h1> 
+  </div>
+  <br><hr>
+<br>
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+  {% for card in cards %}
+  <p style="display: flex; flex-direction: column; justify-content: center; width: 220px; ">
+    <label style="text-align: center;"> No. {{ card }}</label>
+    <img src="{% static 'stores/pokemon ('|add:card|add:').png' %}" style="width: 200px; margin: 10px;">
+  </p>
+  {% endfor %}
+</div>
+
+
+{% endblock content %}

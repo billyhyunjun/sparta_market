@@ -14,6 +14,8 @@ def index(request):
     return render(request, 'stores/index.html', context)
 
 # Create your views here.
+
+
 @require_http_methods(["GET", "POST"])
 def stores(request):
     select = request.GET.get("select")
@@ -30,6 +32,10 @@ def stores(request):
             author__username__icontains=search).order_by(sort)
     else:
         stores = Store.objects.all().order_by(sort)
+        
+    print(">>>>>>>>>>>>>>>>")
+    for store in stores:
+        print(store.card.cardnum)
     context = {
         "stores": stores,
         "select": select,
@@ -52,7 +58,7 @@ def like_stores(request, pk):
 @require_POST
 def like(request, pk):
     if request.user.is_authenticated:
-        store = get_object_or_404(store, pk=pk)
+        store = get_object_or_404(Store, pk=pk)
         if store.like_users.filter(pk=request.user.pk).exists():
             store.like_users.remove(request.user)
         else:
@@ -62,7 +68,7 @@ def like(request, pk):
 
 
 def stores_view(request, pk):
-    store = get_object_or_404(store, pk=pk)
+    store = get_object_or_404(Store, pk=pk)
     context = {
         "store": store,
     }
@@ -73,11 +79,12 @@ def stores_view(request, pk):
 def create(request):
     if request.user.is_authenticated:
         if request.method == "POST":
-            form = StoreForm(request.POST, request.FILES)
+            form = StoreForm(request.POST)
+            print(form)
             if form.is_valid():
                 store = form.save(commit=False)
+                print(store.card)
                 store.author = request.user
-                store.price = 0
                 store.save()
                 return redirect("stores:stores_view", store.pk)
             print(form.errors)
@@ -92,7 +99,7 @@ def create(request):
 
 @require_POST
 def delete(request, pk):
-    store = get_object_or_404(store, pk=pk)
+    store = get_object_or_404(Store, pk=pk)
     if request.user == store.author:
         store.delete()
         return redirect("stores:stores")
@@ -101,11 +108,10 @@ def delete(request, pk):
 @require_http_methods(["GET", "POST"])
 def update(request, pk):
     if request.user.is_authenticated:
-        store = get_object_or_404(store, pk=pk)
+        store = get_object_or_404(Store, pk=pk)
         if request.user == store.author:
             if request.method == "POST":
-                form = StoreForm(
-                    request.POST, request.FILES, instance=store)
+                form = StoreForm(request.POST, instance=store)
                 if form.is_valid():
                     store = form.save()
                 return redirect("stores:stores_view", store.pk)

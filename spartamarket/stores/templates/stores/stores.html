@@ -46,7 +46,7 @@
         <a href="{% url 'stores:stores_view' store.pk %}" style="width: 326px;">
           <div class="col">
             <div class="card" style="align-items: center;">
-              <img class="imgs" src="{{ store.image.url }}" class="card-img-top" />
+              <img class="imgs" src="{% static 'stores/pokemon ('|add:store.card.cardnum|add:').png' %}" class="card-img-top" />
               <div class="card-body">
                 <h3 class="card-title">{{ store.title }}</h3>
                 <div style="display: flex; flex-direction: row; margin-top: 10px;">

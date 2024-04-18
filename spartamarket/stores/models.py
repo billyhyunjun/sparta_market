@@ -9,7 +9,7 @@ class Store(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to="images/", blank=True)
     price = models.IntegerField()
-    
+    card = models.ForeignKey(settings.AUTH_CARD_MODEL, on_delete=models.CASCADE, related_name="cards")
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="stores")
     
     def __str__(self) -> str:

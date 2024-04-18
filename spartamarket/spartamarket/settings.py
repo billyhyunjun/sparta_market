@@ -87,6 +87,7 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = "accounts.User"
+AUTH_CARD_MODEL = "accounts.Card"
 
 
 # Password validation

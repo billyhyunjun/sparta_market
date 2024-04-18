@@ -8,12 +8,21 @@
   </div>
   <br><hr>
 <br>
-{% for card in cards %}
-<p style="display: flex; flex-direction: column; justify-content: center; width: 200px;">
-<label style="text-align: center;"> No. {{ card.cardnum }}</label>
-<img src="{% static 'stores/pokemon ('|add:card.cardnum|add:').png' %}" style="width: 200px; margin: 10px;">
-</p>
-{% endfor %}
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+  {% for card in card_list %}
+  {% if card != "blank" %}
+  <p style="display: flex; flex-direction: column; justify-content: center; width: 220px; ">
+    <label style="text-align: center;"> No. {{ card.cardnum }}</label>
+    <img src="{% static 'stores/pokemon ('|add:card.cardnum|add:').png' %}" style="width: 200px; margin: 10px;">
+  </p>
+  {% else %}
+  <p style="display: flex; flex-direction: column; justify-content: center; width: 220px;">
+    <label style="text-align: center;"> No. ???</label>
+    <img src="{% static 'stores/pokemon (blank).png' %}" style="width: 200px; margin: 10px;">
+  </p>
+  {% endif %}
+  {% endfor %}
+</div>
 
 
 {% endblock content %}

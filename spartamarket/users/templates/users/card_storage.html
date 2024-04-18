@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<br>
+<div class="title_box">
+    <h1>{{ user.username }}님의 보유한 카드 {{ user.cards.count }} 개</h1> 
+  </div>
+  <br><hr>
+<br>
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+  {% for card in all_cards %}
+  <form action="{% url 'users:card_storage' request.user.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" name="cardnum" value="{{ card.cardnum }}" style="display: flex; flex-direction: column; align-items: center; width: 220px; border: none; background: none; padding: 0;">
+      <label style="text-align: center;"> No. {{ card.cardnum }}</label>
+      <img src="{% static 'stores/pokemon ('|add:card.cardnum|add:').png' %}" style="width: 200px; margin: 10px;">
+    </button>
+  </form>
+  
+  {% endfor %}
+</div>
+
+
+{% endblock content %}

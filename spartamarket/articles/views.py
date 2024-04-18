@@ -87,13 +87,11 @@ def create(request):
                 article.author = request.user
                 article.price = 0
                 article.save()
-                print(request.POST.get("hashtag"))
                 for word in request.POST.get("hashtag").split():  # content를 공백기준 리스트로 변경
                     if word.startswith('#'):  # '#' 로 시작하는 요소 선택
                         hashtag, created = Hashtag.objects.get_or_create(content=word)
                         article.hashtags.add(hashtag)
                 return redirect("articles:articles_view", article.pk)
-            print(form.errors)
         else:
             form = ArticleForm()
         context = {

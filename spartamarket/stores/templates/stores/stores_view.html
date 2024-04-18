@@ -36,9 +36,7 @@
   </div>
   <br />
   [ {{ store.id }} ] 번 째 게시물 <br />
-  {% if store.image %}
-    <img class="imgs" src="{{ store.image.url }}" alt="{{ store.image }}" /><br />
-  {% endif %}
+    <img class="imgs" src="{% static 'stores/pokemon ('|add:store.card.cardnum|add:').png' %}"/><br />
   <br />
   <p>작성자 : {{ store.author }}</p>
   <p>내용 : {{ store.content }}</p>
