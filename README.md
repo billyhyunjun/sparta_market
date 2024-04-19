@@ -89,7 +89,8 @@ https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=shari
 ## ** article/view **
 - 작성된 게시글을 확인 할 수 있으며, 게시글의 좋아요 기능 및 작성자의 프로필 확인이 가능하고, 해시태그를 누르면 해시태그와 관련된 글을 볼 수 있습니다. 또한 댓글이 작성이 가능하며, 댓글 작성 시 10포인트를 받습니다.
   
-![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/568ab8cf-bc41-4c80-a351-1cd3c29de961)
+![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/4dde1720-22a5-4f7e-bdd3-d1dc2d9dd4d8)
+
 
 ## ** article/update **
 - 작성자와 동일한 아이디로 접속 또는 관리자 아이디로 접속을 하면 삭제 또는 수정이 가능하며 수정을 하면 작성되었던 게시글과 내용이 나오며 수정하기를 눌러 기존 게시글을 변경할 수 있습니다.
