@@ -6,13 +6,6 @@ from accounts.models import User
 from .models import Store
 from django.contrib import messages
 
-def index(request):
-    stores = Store.objects.all().order_by("-created_at")[:3]
-    context = {
-        "stores": stores,
-    }
-    return render(request, 'stores/index.html', context)
-
 # Create your views here.
 
 
