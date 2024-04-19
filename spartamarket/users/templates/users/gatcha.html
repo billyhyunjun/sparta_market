@@ -60,20 +60,20 @@
         <img src="{% static 'stores/pokemon ('|add:gatcha|add:').png' %}" style="width: 200px; margin: 10px;">
     </p>
     <label> 1회당 100 포인트</label>
-    <form action="{% url " users:gatcha" %}" method="POST">
+    <form action="{% url "users:gatcha" %}" method="POST">
         {% csrf_token %}
         <button type="submit">한번 더 뽑기</button>
     </form>
     <br>
     <label> 내 카드 확인하기</label>
-    <a href="{% url " users:cards" user.pk %}"> <button>보유 카드 보기</button> </a>
+    <a href="{% url "users:cards" user.pk %}"> <button>보유 카드 보기</button> </a>
     <br>
     {% else %}
     <h2>어서 오세요</h2>
     <img src="{% static 'stores/pokemon (blank).png' %}" style="width: 200px; margin: 10px;">
     <br>
     <label> 1회당 100 포인트</label>
-    <form action="{% url " users:gatcha" %}" method="POST">
+    <form action="{% url "users:gatcha" %}" method="POST">
         {% csrf_token %}
         <button type="submit">뽑기</button>
         <br>
