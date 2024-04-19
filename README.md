@@ -1,4 +1,4 @@
-#🗣️Project: SpartaMarket
+# 🗣️Project: SpartaMarket
 ### 카드를 수집하는 게시글
 
 <br>
