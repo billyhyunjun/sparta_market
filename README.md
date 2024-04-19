@@ -114,7 +114,7 @@ https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=shari
 ## ** my_card **
 - 현재 내가 보유하고 있는 총 카드의 수와 도감 완성 목록을 확인 할 수 있습니다.
   
-![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/baf1ea47-96bf-4946-a9a6-7afb8f13bbc6)
+![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/dbf5bf2c-5914-471b-8f9f-6a620cdccd76)
 
 
 ## ** stores **
