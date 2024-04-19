@@ -61,12 +61,14 @@ https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=shari
 ## ** index **
 - 메인화면으로 화면 상단 네브바에는 유저의 정보 밑 바로가기키가 있으며, 중단에는 최근에 작성된 게시글과 판매글이 업로드 됩니다. 그리고 하단에는 메인가기 및 도감확인, 웹페이시 사용법이 표기 되어 있습니다.
 
-![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/d73d3c50-22af-44ca-8ccc-472e2899027d)
+![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/58633751-83ce-46f6-9091-e8161ac4d079)
+
 
 ## ** login **
 - 로그인 화면입니다. 해당아이디가 있으면 로그인을 시도 할 수 있으며, 아이디가 없으면 회원가입을 할 수 있습니다.
   
 ![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/c654bec2-1f11-4ee2-916e-b146ad67a55f)
+
 
 ## ** signup **
 - 회원가입을 하는 곳이며, 아이디와 페스워드, 확인 페스워드를 넣으면 회원가입이 완료 됩니다.
@@ -75,9 +77,9 @@ https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=shari
 
 
 ## ** articles **
-- 현재 작성 되어있는 게시들을 볼 수 있으며 상단에 검색에 내용을 넣어서 검색이 가능하며, 필터 기능으로 제목, 최신 등 정렬이 가능합니다.
+- 현재 작성 되어있는 게시들을 볼 수 있으며 상단에 검색에 내용을 넣어서 검색이 가능하며, 필터 기능으로 제목, 최신, 좋아요요 등 정렬이 가능합니다.
   
-![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/7e17bb69-8c00-4717-9574-9f7933e44806)
+![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/6e6c8e1d-5f52-4c96-824b-3704c44d826b)
 
 
 ## ** articles/create **
@@ -89,7 +91,7 @@ https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=shari
 ## ** article/view **
 - 작성된 게시글을 확인 할 수 있으며, 게시글의 좋아요 기능 및 작성자의 프로필 확인이 가능하고, 해시태그를 누르면 해시태그와 관련된 글을 볼 수 있습니다. 또한 댓글이 작성이 가능하며, 댓글 작성 시 10포인트를 받습니다.
   
-![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/4dde1720-22a5-4f7e-bdd3-d1dc2d9dd4d8)
+![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/74c31c21-d1f1-4759-95b9-6906c3322f57)
 
 
 ## ** article/update **
