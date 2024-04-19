@@ -144,7 +144,7 @@ https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=shari
 ## ** store/update **
 - 수정시에는 카드변경은 불가능하며 가격과 내용이 변경 가능합니다.
 
-![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/d8e19eac-9bb2-409e-adbc-c3465c1f8bb0)
+![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/0a68725f-2d10-41ab-a817-ea8e1a1144bf)
 
 
 ## ** card_document **
@@ -179,6 +179,8 @@ https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=shari
 
 </div>
 </details>
+
+
 ## 📌 Key Features
 
 ### 1. Post CRUD
