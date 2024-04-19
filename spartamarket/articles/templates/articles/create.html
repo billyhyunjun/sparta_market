@@ -23,7 +23,7 @@
 {% block content %}
   <div>
     <br />
-    <h2>상품정보</h2> <hr />
+    <h2>게시글</h2> <hr />
   </div>
 
   <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
@@ -47,7 +47,7 @@
         앞에 "#" 을 붙여서 작성해주세요
     </div>
     <div class="table">
-        <label class="lable_size" for="id_content">상품설명:</label>
+        <label class="lable_size" for="id_content">내용:</label>
         <textarea name="content" cols="40" rows="10" required id="id_content"></textarea>
     </div>
     <div style="display: flex; justify-content: right; margin: 50px 0 ;">
