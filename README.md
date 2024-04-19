@@ -37,14 +37,14 @@ SpartaMarket는 게시글을 작성해서 포인트를 모아서 카드를 뽑�
 
 ## ⚙️ Technology Stack
 - **Frontend** : HTML, CSS, JavaScript
-- **Backend** : Flask
-- **Database ORMR** : SQLAlchemy
-- **Idea Brainstorming Tools and Environments** : Slack, Zep, Notion, figma
+- **Backend** : Django
+- **Database ORMR** : SQLite3
+- **Idea Brainstorming Tools and Environments** : figmam, drow.io
 <br>
 
 ## 📝 Project Architecture
 
-- **wireframe**
+- **WireFrame**
 
 https://www.figma.com/file/AUgJMaoptrCo32HkvGSYhS/sparta_market?type=whiteboard&node-id=0-1&t=cgiAgykbrQ58Dogk-0
 
