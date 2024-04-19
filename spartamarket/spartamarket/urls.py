@@ -23,13 +23,13 @@ from django.views.static import serve
 
 
 urlpatterns = [
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root':settings.MEDIA_ROOT}), # 이부분 추가!!
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('articles/', include("articles.urls")),
     path('users/', include("users.urls")),
     path('accounts/', include("accounts.urls")),
     path('stores/', include("stores.urls")),
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root':settings.MEDIA_ROOT}), # 이부분 추가!!
 ]
 
 if settings.DEBUG:
