@@ -42,6 +42,7 @@ def login(request):
 def logout(request):
     if request.user.is_authenticated:
         auth_logout(request)
+        messages.add_message(request, messages.INFO, '로그아웃 되었습니다.')
     return redirect("index")
 
 

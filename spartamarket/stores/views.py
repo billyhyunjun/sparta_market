@@ -99,7 +99,7 @@ def create(request):
 def delete(request, pk):
     if request.user.is_authenticated:
         store = get_object_or_404(Store, pk=pk)
-        if request.user == store.author:
+        if request.user == store.author or request.user.is_superuser:
             seller = get_object_or_404(User, pk=store.author.pk)
             card = store.card
             seller.cards.add(card)
@@ -134,7 +134,7 @@ def buy(request, pk):
 def update(request, pk):
     if request.user.is_authenticated:
         store = get_object_or_404(Store, pk=pk)
-        if request.user == store.author:
+        if request.user == store.author or request.user.is_superuser:
             if request.method == "POST":
                 form = StoreForm(request.POST, instance=store)
                 if form.is_valid():
@@ -146,5 +146,5 @@ def update(request, pk):
             }
             return render(request, "stores/update.html", context)
         else:
-            return redirect("articels:stores")
+            return redirect("stores:stores")
     return redirect("accounts:login")

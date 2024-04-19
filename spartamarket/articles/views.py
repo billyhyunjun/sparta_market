@@ -111,7 +111,7 @@ def create(request):
 @require_POST
 def delete(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    if request.user == article.author:
+    if request.user == article.author or request.user.is_superuser:
         article.delete()
         messages.add_message(request, messages.INFO, '게시글이 삭제 되었습니다.')
         return redirect("articles:articles")
@@ -122,7 +122,7 @@ def update(request, pk):
     if request.user.is_authenticated:
         article = get_object_or_404(Article, pk=pk)
         hashtags = article.hashtags.all().order_by("content")
-        if request.user == article.author:
+        if request.user == article.author or request.user.is_superuser:
             if request.method == "POST":
                 form = ArticleForm(
                     request.POST, request.FILES, instance=article)
@@ -166,7 +166,7 @@ def comment_create(request, pk):
 @require_POST
 def comment_delete(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
-    if request.user == comment.author:
+    if request.user == comment.author or request.user.is_superuser:
         comment.delete()
         return redirect("articles:articles_view", pk)
     else:
