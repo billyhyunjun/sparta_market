@@ -6,6 +6,7 @@ from django.contrib import messages
 from .models import Article, Comment, Hashtag
 from accounts.models import User
 from stores.models import Store
+from django.db.models import Count
 
 
 def index(request):
@@ -25,17 +26,20 @@ def articles(request):
     select = request.GET.get("select")
     search = request.GET.get("search")
     sort = request.GET.get("sort", "-created_at")
-    if select == "title":
-        articles = Article.objects.filter(
-            title__icontains=search).order_by(sort)
-    elif select == "content":
-        articles = Article.objects.filter(
-            content__icontains=search).order_by(sort)
-    elif select == "author":
-        articles = Article.objects.filter(
-            author__username__icontains=search).order_by(sort)
+    if sort == "like_users":
+        articles = Article.objects.filter(title__icontains=search).annotate(num_likes=Count('like_users')).order_by('-num_likes', "-created_at")
     else:
-        articles = Article.objects.all().order_by(sort)
+        if select == "title":
+            articles = Article.objects.filter(
+                title__icontains=search).order_by(sort)
+        elif select == "content":
+            articles = Article.objects.filter(
+                content__icontains=search).order_by(sort)
+        elif select == "author":
+            articles = Article.objects.filter(
+                author__username__icontains=search).order_by(sort)
+        else:
+            articles = Article.objects.all().order_by(sort)
     context = {
         "articles": articles,
         "select": select,
@@ -72,6 +76,7 @@ def articles_view(request, pk):
     comment_form = CommentForm()
     comments = article.comments.all().order_by("-pk")
     hashtags = article.hashtags.all().order_by("content")
+    article.increase_views()
     context = {
         "article": article,
         "comment_form": comment_form,

@@ -50,6 +50,7 @@
 <div style="display: flex; flex-direction: column; align-items: center;">
   <div style="display: flex; margin-top: 5px;">
   <h3 style="margin-right: 100px;">[ {{ article.author }} ] 님의 게시물</h3>
+  <label style="margin-right: 30px;"> <strong> 조희수 {{ article.views }} 회 </strong> </label>
     {% if article.author == request.user or request.user.is_superuser or is_staff%}
       <form action="{% url 'articles:delete' article.pk %}" method="POST">
         {% csrf_token %}
