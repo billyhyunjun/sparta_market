@@ -55,7 +55,7 @@ https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=shari
 ## 🖥️Template View
 
 <details>
-<summary>View Template</summary>
+<summary>View Template (click here) </summary>
 <div markdown="1">       
 
 ## ** index **
