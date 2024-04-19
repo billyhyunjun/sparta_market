@@ -1,4 +1,4 @@
-![image](https://github.com/billyhyunjun/sparta_market/assets/157565164/0e89700a-c2d2-41b0-9b86-092e9f70e89a)# 🗣️Project: SpartaMarket
+🗣️Project: SpartaMarket
 #### 카드를 수집하는 게시글
 
 <br>
