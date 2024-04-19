@@ -3,25 +3,55 @@
 
 {% block style %}
 <style>
-    .gatcha_box{
+    .gatcha_box {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
+    .container {
+        width: 220px;
+        height: 310px;
+        transition: all 0.1s;
+        position: relative;
+    }
+
+    .overlay {
+        position: absolute;
+        width: 220px;
+        height: 310px;
+        background: linear-gradient(105deg,
+                transparent 40%,
+                rgba(255, 219, 112, 0.8) 45%,
+                rgba(132, 50, 255, 0.6) 50%,
+                transparent 54%);
+        filter: brightness(1.1) opacity(0.8);
+        mix-blend-mode: color-dodge;
+        background-size: 150% 150%;
+        background-position: 100%;
+        transition: all 0.1s;
+        z-index: 1;
+    }
+
+    .card {
+        width: 220px;
+        height: 310px;
+        background-size: cover;
+    }
 </style>
 {% endblock style %}
 
 {% block content %}
 <br>
 <div class="title_box">
-    <h1>카드 뽑기</h1> 
+    <h1>카드 뽑기</h1>
 </div>
-<br><hr>
+<br>
+<hr>
 <br>
 
 
-    <div class="gatcha_box">
+<div class="gatcha_box">
     {% if gatcha %}
     <p class="g_box">
     <h2>축하합니다</h2>
@@ -30,25 +60,25 @@
         <img src="{% static 'stores/pokemon ('|add:gatcha|add:').png' %}" style="width: 200px; margin: 10px;">
     </p>
     <label> 1회당 100 포인트</label>
-    <form action="{% url "users:gatcha" %}" method="POST">
+    <form action="{% url " users:gatcha" %}" method="POST">
         {% csrf_token %}
-    <button type="submit">한번 더 뽑기</button>
+        <button type="submit">한번 더 뽑기</button>
     </form>
     <br>
     <label> 내 카드 확인하기</label>
-    <a href="{% url "users:cards" user.pk %}"> <button>보유 카드 보기</button> </a>
+    <a href="{% url " users:cards" user.pk %}"> <button>보유 카드 보기</button> </a>
     <br>
     {% else %}
     <h2>어서 오세요</h2>
     <img src="{% static 'stores/pokemon (blank).png' %}" style="width: 200px; margin: 10px;">
     <br>
     <label> 1회당 100 포인트</label>
-    <form action="{% url "users:gatcha" %}" method="POST">
+    <form action="{% url " users:gatcha" %}" method="POST">
         {% csrf_token %}
-    <button type="submit">뽑기</button>
-    <br>
-    {% endif %}
-    </p>
+        <button type="submit">뽑기</button>
+        <br>
+        {% endif %}
+        </p>
 </div>
 
 
