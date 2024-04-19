@@ -39,14 +39,13 @@
     </form>
   </div>
   <hr /><br />
-
   <div style="display: flex; justify-content: center;">
     <div class="row row-cols-1 row-cols-md-3 g-4" id="storeContainer">
       {% for store in stores %}
         <a href="{% url 'stores:stores_view' store.pk %}" style="width: 326px;">
           <div class="col">
             <div class="card" style="align-items: center;">
-              <img class="imgs" src="{% static 'stores/pokemon ('|add:store.card.cardnum|add:').png' %}" class="card-img-top" />
+              <img style="width: 200px; margin: 20px;" src="{% static 'stores/pokemon ('|add:store.card.cardnum|add:').png' %}" class="card-img-top" />
               <div class="card-body">
                 <h3 class="card-title">{{ store.title }}</h3>
                 <div style="display: flex; flex-direction: row; margin-top: 10px;">

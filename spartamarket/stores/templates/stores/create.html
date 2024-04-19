@@ -2,70 +2,74 @@
 {% load static %}
 
 {% block style %}
-  <style>
-    .lable_size {
-      width: 200px;
-      text-align: center;
-    }
-    .table {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-top: 20px;
-    }
-    .div_box {
-      display: flex;
-      flex-direction: column;
-    }
-  </style>
+<style>
+  .lable_size {
+    width: 200px;
+    text-align: center;
+  }
+
+  .table {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .div_box {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
-  <div>
-    <br />
-    <h2>상품정보</h2> <hr />
-  </div>
+<div>
+  <br />
+  <h2>상품정보</h2>
+  <hr />
+</div>
 
-  <form action="{% url 'stores:create' %} " method="POST">
-    {% csrf_token %}
-    <div class="table">
-      <div>
-        <label class="lable_size" for="id_image">상품이미지:</label>
-      </div>
-      <div class="div_box">
-        <input type="hidden" name="card" value="{{ card_choice.pk }}">
-        <img id="preview"style="width: 200px; "src="{% if card_choice %}{% static 'stores/pokemon ('|add:card_choice.cardnum|add:').png' %}{% else %}{% static 'stores/select.jpg' %}{% endif %}" />
+<form action="{% url 'stores:create' %} " method="POST">
+  {% csrf_token %}
+  <div class="table">
+    <div>
+      <label class="lable_size" for="id_image">상품이미지:</label>
+    </div>
+    <div class="div_box">
+      <input type="hidden" name="card" value="{{ card_choice.pk }}">
+      <img id="preview" style="width: 200px; "
+        src="{% if card_choice %}{% static 'stores/pokemon ('|add:card_choice.cardnum|add:').png' %}{% else %}{% static 'stores/pokemon(select).jpg' %}{% endif %}" />
       <br />
-        <button onclick="window.location.href='{% url 'users:card_storage' request.user.pk %}'">카드 선택하기</button>
-      </div>
+      <button onclick="window.location.href='{% url 'users:card_storage' request.user.pk %}'">카드 선택하기</button>
     </div>
-    <div class="table">
-      <label class="lable_size" for="id_title">상품명:</label>
-      <input type="text" name="title" maxlength="50" required id="id_title" />
-    </div>
-    <div class="table">
-      <label class="lable_size" for="price">판매가격:</label>
-      <input type="number" name="price" required id="price" style="margin-right: 20px;" /> 포인트
-    </div>
-    <div class="table">
-      <label class="lable_size" for="id_content">상품설명:</label>
-      <textarea name="content" cols="40" rows="10" required id="id_content"></textarea>
-    </div>
-    <div style="display: flex; justify-content: right; margin: 50px 0 ;">
-      <button type="submit" style="margin-right: 100px;">판매하기</button>
-    </div>
-  </form>
-  <script>
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader()
-        reader.onload = function (e) {
-          document.getElementById('preview').src = e.target.result
-        }
-        reader.readAsDataURL(input.files[0])
-      } else {
-        document.getElementById('preview').src = ''
+  </div>
+  <div class="table">
+    <label class="lable_size" for="id_title">상품명:</label>
+    <input type="text" name="title" maxlength="50" required id="id_title" />
+  </div>
+  <div class="table">
+    <label class="lable_size" for="price">판매가격:</label>
+    <input type="number" name="price" required id="price" style="margin-right: 20px;" /> 포인트
+  </div>
+  <div class="table">
+    <label class="lable_size" for="id_content">상품설명:</label>
+    <textarea name="content" cols="40" rows="10" required id="id_content"></textarea>
+  </div>
+  <div style="display: flex; justify-content: right; margin: 50px 0 ;">
+    <button type="submit" style="margin-right: 100px;">판매하기</button>
+  </div>
+</form>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader()
+      reader.onload = function (e) {
+        document.getElementById('preview').src = e.target.result
       }
+      reader.readAsDataURL(input.files[0])
+    } else {
+      document.getElementById('preview').src = ''
     }
-  </script>
+  }
+</script>
 {% endblock %}
