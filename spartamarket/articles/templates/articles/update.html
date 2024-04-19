@@ -23,14 +23,14 @@
 {% block content %}
   <div>
     <br />
-    <h2>상품정보</h2> <hr />
+    <h2>게시글 수정</h2> <hr />
   </div>
 
   <form action="{% url 'articles:update' article.pk %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="table">
       <div>
-        <label class="lable_size" for="id_image">상품이미지:</label>
+        <label class="lable_size" for="id_image">게시글이미지:</label>
       </div>
       <div class="div_box">
         <img id="preview" style="width: 300px; height: 300px;" src="{% if article.image %} {{ article.image.url }} {% else %} {% static 'article/image-gallery.png' %} {% endif %} " />
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="table">
-        <label class="lable_size" for="id_title">상품명:</label>
+        <label class="lable_size" for="id_title">제목:</label>
         <input type="text" name="title" maxlength="50" required id="id_title" value="{{ article.title }}" />
     </div>
     <div class="table">
@@ -46,7 +46,7 @@
       <input type="text" name="hashtag" required id="hashtag" value="{% for hashtag in hashtags %} {{ hashtag }} {% endfor %}" style="margin-right: 20px;"/>앞에 "#" 을 붙여서 작성해주세요
   </div>
     <div class="table">
-        <label class="lable_size" for="id_content">상품설명:</label>
+        <label class="lable_size" for="id_content">내용:</label>
         <textarea name="content" cols="40" rows="10" required id="id_content">{{ article.content }}</textarea>
     </div>
     <div style="display: flex; justify-content: right; margin: 50px 0 ;">
