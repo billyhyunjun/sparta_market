@@ -104,6 +104,7 @@ def create(request):
                         article.hashtags.add(hashtag)
                 messages.add_message(request, messages.INFO, '게시글이 생성 되었습니다. **100포인트** ')
                 return redirect("articles:articles_view", article.pk)
+            print(form.errors)
         else:
             form = ArticleForm()
         context = {
