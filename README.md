@@ -52,7 +52,7 @@ https://www.figma.com/file/AUgJMaoptrCo32HkvGSYhS/sparta_market?type=whiteboard&
 
 https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=sharing
 
-- ** EC2 WEB PAGE **
+- ** EC2 WEB PAGE ** - ( *추가* 수업에 배운 웹사이트 배포기능을 이용하여 작성된 사이트 입니다.)
 
 http://43.203.172.11/
 
