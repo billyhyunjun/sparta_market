@@ -52,6 +52,10 @@ https://www.figma.com/file/AUgJMaoptrCo32HkvGSYhS/sparta_market?type=whiteboard&
 
 https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=sharing
 
+- ** EC2 WEB PAGE **
+
+http://43.203.172.11/
+
 ## 🖥️Template View
 
 <details>
