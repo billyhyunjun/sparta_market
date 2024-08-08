@@ -50,7 +50,7 @@ SpartaMarket는 게시글 작성을 통한 포인트로 카드 뽑기 및 상점
 ## 🖥️Template View
 
 <details>
-<summary>View Template (click here) </summary>
+<summary> 탬플릿 미리보기 (click here) </summary>
 <div markdown="1">       
 
 ## **index**
