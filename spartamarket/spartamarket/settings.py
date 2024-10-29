@@ -29,12 +29,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY', default='default_secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
     "43.203.172.11",
     "127.0.0.1",
+    "13.124.181.100",
+    ".silverlinings.site"
 ]
 
 
