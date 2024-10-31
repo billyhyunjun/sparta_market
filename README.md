@@ -11,7 +11,7 @@ SpartaMarket는 게시글 작성을 통한 포인트로 카드 뽑기 및 상점
 <br>
 
 ## ⏲️ Development time
-- 2024.04.15(월) ~ 2023.04.19(금)
+- 2024.04.22(월) ~ 2023.05.02(목)
 <br>
 
 ## 🧑‍🤝‍🧑 Development Function: 
@@ -26,24 +26,9 @@ SpartaMarket는 게시글 작성을 통한 포인트로 카드 뽑기 및 상점
 ## 💻 Development Environment
 - **Programming Language** : Python 3.10
 - **Web Framework** : Django
-- **Template Engine** : Jinja2
-- **Database** : SQLite3 (for development and testing)
-- **IDE** : Visual Studio Code
-- **Version Control** : Git, GitHub
-<br>
-
-## ⚙️ Technology Stack
-- **Frontend** : HTML, CSS, JavaScript
-- **Backend** : Django
-- **Database ORMR** : SQLite3
-- **Idea Brainstorming Tools and Environments** : figmam, drow.io
-<br>
-
-## 📝 Project Architecture
-
-- **WireFrame** : [피그마](https://www.figma.com/file/AUgJMaoptrCo32HkvGSYhS/sparta_market?type=whiteboard&node-id=0-1&t=cgiAgykbrQ58Dogk-0)를 이용 아이디어 구상
-
-- **ERD** : 모델 구성 ERD [DrawIO](https://drive.google.com/file/d/1-t8pzZDOuCaNdM8Tw0UoU-DQHvk6gtGu/view?usp=sharing)를 통한 작성
+- **Database** : SQLite3 
+- **Server Deployment** : AWS EC2 (t1.micro)
+- **Idea Brainstorming Tools** : [figma](https://www.figma.com/board/AUgJMaoptrCo32HkvGSYhS/sparta_market?node-id=0-1&t=ejx4qWt9wHHgTUV4-1)
 
 <br>
 
