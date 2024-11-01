@@ -30,6 +30,23 @@ SpartaMarket는 게시글 작성을 통한 포인트로 카드 뽑기 및 상점
 
 <br>
 
+## 📚 Development scope
+   - **유저**
+        - 사용자 인증 및 권한 관리: 사용자 등록, 로그인, 로그아웃
+        - 사용자 정보 수정 및 삭제: 프로필 수정, 계정 삭제
+   - **게시글**
+        - 게시글 CRUD: 게시글 작성, 조회, 수정, 삭제 및 권한 기능
+        - 댓글 CRUD: 댓글 작성, 조회, 수정, 삭제 및 권한 기능
+        - 게시글 목록: 모든 게시글의 리스트 조회 기능
+   - **장터**
+        - 판매글 CRUD: 판매글 작성, 조회, 수정, 삭제 및  권한 기능
+        - 판매글 목록: 모든 판매글의 리스트 조회 기능
+   - **카드**
+        - 카드 뽑기: 사용자 카드 뽑기 기능
+        - 카드 도감: 뽑은 카드의 상세 정보 조회
+     
+<br>
+
 ## 🖥️Template View
 
 <details>
@@ -161,46 +178,9 @@ SpartaMarket는 게시글 작성을 통한 포인트로 카드 뽑기 및 상점
 </details>
 <br>
 
-## 📌 Key Features
+## 🕵️Quality Assurance testing
 
-### 1. Post CRUD
-   - Users can create new posts and view all posts.
-   - Posts can be edited or deleted on the post detail view page.
-
-### 2. Comment CRD
-   - All comments on the post are displayed at the bottom of the post detail view page.
-   - Users can create, view, and delete comments on the post detail page.
-
-### 3. Sign Up, Log In
-   - Membership registration is mandatory for first-time users, enabling them to log in and access the site's features.
-   - Only logged-in users can create posts, while both logged-in and anonymous users can view posts and comments.
-     
-### 5.  Search Functionality
-   - Users can search for posts by movie name, article title, author, and content using the post search box.
-   - Clicking on search results directs users to the detailed page of the respective post.
-
-### 6. Like Feature
-   - Users can like posts on the post details view page.
-   - The 'Like' button toggles to 'Dislike' upon clicking and can be undone, allowing users to like a post only once.
-     
-### 8. Administrator Permissions
-   - Administrators with the ID "admin_team8" have the authority to edit or delete posts and comments, irrespective of the post's author.
-
-### 9. Random Card Draw
-   - Users can enjoy the excitement of drawing random cards from a predefined set.
-   - Each card drawn presents unique attributes or benefits to the user.
-
-### 10. Card Inventory
-   - Users can view the cards they currently possess in their inventory.
-   - Detailed information about each card, including its rarity and effects, is displayed.
-   
-### 11. Card Trading
-   - Users have the option to sell the cards they no longer need in exchange for points.
-   - Points acquired through card sales can be used to purchase other cards from the system.
-   
-### 12. User Interaction
-   - Users can follow and unfollow other users, fostering a sense of community within the platform.
-   - The 'Following' list enables users to keep track of updates from their followed users.
+- QA테스트: [Notion QA 테스트 케이스](https://parallel-radiator-f96.notion.site/sparta_market-12ecafd9e0a080628f70d3314c058259?pvs=4)
 
 <br> 
 
